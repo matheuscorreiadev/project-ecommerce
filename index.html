@@ -13,15 +13,26 @@
 
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/cabecalho.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-    <header>
-        <a href="/">
+    <header class="cabecalho">
+        <div class="header-conteudo">
+            <div class="header-esquerda">
+
+                <button class="menu-hamburguer">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+        <a class="logo" href="/">
             <img src="./assets/images/logo.svg" alt="Dev em Dobro E-Commerce Master">
         </a>
-        <nav>
+        </div>
+        <nav class="menu-principal">
             <ul>
                 <li>
                     <a href="#home">Home</a>
@@ -44,9 +55,12 @@
                 </li>
             </ul>
         </nav>
-        <buttons>
-            <img src="./assets/images/icone_carrinho.svg" alt="carrinho de compras">
+        <buttons class="botao-carrinho" data-micromodal-trigger="modal-1">
+            <img src="./assets/images/icone_carrinho.svg" alt="carrinho de compras"
+            />
+            <span id="contador-carrinho">0</span>
         </buttons>
+        </div>
     </header>
     <main>
         <section>
