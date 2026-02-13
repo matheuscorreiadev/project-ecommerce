@@ -2,7 +2,7 @@ const botoesAdicionarAoCarrinho = document.querySelectorAll(".adicionar-ao-carri
 
 botoesAdicionarAoCarrinho.forEach(botao => {
     botao.addEventListener("click", (evento) => {
-        
+
         const elementoProduto = evento.target.closest(".produto");
         const produtoId = elementoProduto.dataset.id;
         const produtoNome = elementoProduto.querySelector(".nome").textContent;
@@ -12,9 +12,9 @@ botoesAdicionarAoCarrinho.forEach(botao => {
         const carrinho = obterProdutosDoCarrinho();
         const existeProduto = carrinho.find(produto => produto.id === produtoId);
 
-        if(existeProduto){
+        if (existeProduto) {
             existeProduto.quantidade += 1;
-        }else{
+        } else {
             const produto = {
                 id: produtoId,
                 nome: produtoNome,
@@ -27,6 +27,7 @@ botoesAdicionarAoCarrinho.forEach(botao => {
 
         salvarProdutosNoCarrinho(carrinho);
         atualizarContadorCarrinho();
+        renderizarTabelaDoCarrinho();
     });
 });
 
@@ -34,15 +35,15 @@ function salvarProdutosNoCarrinho(carrinho) {
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }
 
-function obterProdutosDoCarrinho () {
+function obterProdutosDoCarrinho() {
     const produtos = localStorage.getItem("carrinho");
     return produtos ? JSON.parse(produtos) : [];
 }
 
 function atualizarContadorCarrinho() {
-    const carrinho = obterProdutosDoCarrinho();
+    const produtos = obterProdutosDoCarrinho();
     let total = 0;
-    carrinho.forEach(produto => {
+    produtos.forEach(produto => {
         total += produto.quantidade;
     });
 
@@ -50,3 +51,28 @@ function atualizarContadorCarrinho() {
 }
 
 atualizarContadorCarrinho();
+
+function renderizarTabelaDoCarrinho() {
+    const produtos = obterProdutosDoCarrinho();
+    const corpoTabela = document.querySelector("#modal-1-content table tbody");
+    corpoTabela.innerHTML = "";
+    produtos.forEach(produto => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="td-produto">
+                <img
+                src="${produto.imagem}" 
+                alt="${produto.nome}"
+                />
+                </td>
+                <td>${produto.nome}</td>
+                <td class="td-preco-unitario">R$ ${produto.preco.toFixed(2).replace(".", ",")}</td>
+                <td class="td-quantidade">
+                    <input type="number" value="${produto.quantidade}" min="1" />
+                </td>
+                <td class="td-preco-total">R$ ${produto.preco.toFixed(2).replace(".", ",")}</td>
+                <td><button class="btn-remover" data-id="${produto.id} id="deletar"></button></td>`;
+        corpoTabela.appendChild(tr);
+    });
+}
+
+renderizarTabelaDoCarrinho();
