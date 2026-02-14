@@ -70,9 +70,32 @@ function renderizarTabelaDoCarrinho() {
                     <input type="number" value="${produto.quantidade}" min="1" />
                 </td>
                 <td class="td-preco-total">R$ ${produto.preco.toFixed(2).replace(".", ",")}</td>
-                <td><button class="btn-remover" data-id="${produto.id} id="deletar"></button></td>`;
+                <td><button class="btn-remover" data-id="${produto.id}" id="deletar"></button></td>`;
         corpoTabela.appendChild(tr);
     });
 }
 
 renderizarTabelaDoCarrinho();
+
+const corpoTabela = document.querySelector("#modal-1-content table tbody");
+
+corpoTabela.addEventListener("click", evento => {
+    console.log("entrou aqui");
+    console.log(evento.target.classList.contains("btn-remover"));
+
+    if (evento.target.classList.contains("btn-remover")) {  
+        const id = evento.target.dataset.id;
+        removerProdutoDoCarrinho(id);
+    }            
+    
+})
+
+function removerProdutoDoCarrinho(id) {
+    const produtos = obterProdutosDoCarrinho();
+
+    const carrinhoAtualizado = produtos.filter(produto => produto.id !== id);
+
+    salvarProdutosNoCarrinho(carrinhoAtualizado);
+    atualizarContadorCarrinho();
+    renderizarTabelaDoCarrinho();
+}
