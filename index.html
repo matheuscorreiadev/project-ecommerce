@@ -176,13 +176,23 @@
         </div>
     </footer>
 
-    <div id="modal-1" aria-hidden="true">
-        <div tabindex="-1" data-micromodal-close>
-            <div class="container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+    <div id="modal-1" class="modal" aria-hidden="true">
+        <div tabindex="-1">
+            <div 
+            class="container" 
+            role="dialog" 
+            aria-modal="true" 
+            aria-labelledby="modal-1-title"
+            >
                 <header>
                     <h2 id="modal-1-title">Carrinho de Compras</h2>
-                    <button class="fechar" aria-label="Close modal" data-micromodal-close></button>
+                    <button 
+                    class="fechar" 
+                    aria-label="Close modal" 
+                    data-micromodal-close
+                    ></button>
                 </header>
+                
                 <div id="modal-1-content">
                     <table>
                         <thead>
@@ -229,6 +239,7 @@
     </div>
 
     <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    <script src="./js/modal.js"></script>
 
     <script src="./js/carrinho.js"></script>
 </body>
