@@ -155,7 +155,7 @@ function renderizarTabelaDoCarrinho() {
                 <input type="number" class="input-quantidade" data-id="${produto.id}" value="${produto.quantidade}" min="1" />
             </td>
             <td>R$ ${(produto.preco * produto.quantidade).toFixed(2).replace(".", ",")}</td>
-            <td><button class="btn-remover" data-id="${produto.id}">X</button></td>`;
+            <td><button class="btn-remover" data-id="${produto.id}"></button></td>`;
         corpoTabela.appendChild(tr);
     });
 }
